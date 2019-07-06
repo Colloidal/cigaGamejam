@@ -29,4 +29,8 @@ public static class GlobalValues
     public static int Player2HP;
     public static int Player3HP;
     public static int Player4HP;
+    public static bool Raymark1;
+    public static bool Raymark2;
+    public static bool Raymark3;
+    public static bool Raymark4;
 }

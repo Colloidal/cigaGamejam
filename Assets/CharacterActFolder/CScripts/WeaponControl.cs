@@ -5,13 +5,16 @@ using UnityEngine;
 public class WeaponControl : MonoBehaviour
 {
     public GameObject player;
+    GameObject rayy;
+
 
     private List<bool> IsPlayerInCD = new List<bool> { false, false, false, false };
 
     private void Start()
     {
+        rayy = new GameObject();
         player = GameObject.Find("player");
-        WeaponManager.GetInstance().PlayerChooseWeapon(1,1);
+        WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
         WeaponManager.GetInstance().PlayerChooseWeapon(2, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(4, 1);
@@ -24,7 +27,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                WeaponManager.GetInstance().Shoot(1,GameObject.Find("firePos").transform.position);
+                Shoot(1,GameObject.Find("firePos").transform.position,characterMovement2D.forwardPointer);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(1).AttackCD, 1));
             }
             else
@@ -81,6 +84,57 @@ public class WeaponControl : MonoBehaviour
             IsPlayerInCD[3] = true;
         }
     }
+    public void Shoot(int sourceplayer, Vector3 playerposition, Vector3 pointer)
+    {
+        int weapontype = WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Number;
+        if (weapontype == 1)
+        {
+            GameObject test = Resources.Load("Bullet" + weapontype.ToString(), typeof(GameObject)) as GameObject;
+            test.GetComponent<NormalBullet>().SourcePlayer = sourceplayer;
+            test.GetComponent<NormalBullet>().speed = new Vector3(pointer.x * 0.01f * WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Speed,
+             pointer.y * 0.01f * WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Speed);
+            test.transform.position = playerposition;
+            Instantiate(test);
+        }
+        else if (weapontype == 3)
+        {
+            WeaponRay weaponRay = new WeaponRay();
+            Ray2D ray = new Ray2D(playerposition, pointer);
+            RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
+            if (info.collider != null)
+            {
+                if (info.transform.gameObject.CompareTag("Player"))
+                {
+                    Debug.LogWarning("检测到玩家");
+                }
+                else
+                {
+                    Debug.Log("检测到墙");
+                }
+                Debug.Log(rayy);
+                GameObject rayer = Instantiate(rayy);
+                LineRenderer lineRenderer = rayer.AddComponent<LineRenderer>();
+                lineRenderer.material = Resources.Load("rayMaterial", typeof(Material)) as Material;
+                lineRenderer.endColor = new Color(1, 1, 1);
+                lineRenderer.startWidth = 0.07f;
+                lineRenderer.endWidth = 0.07f;
+                lineRenderer.startColor = new Color(1, 0, 0);
+                lineRenderer.SetPositions(new Vector3[] { ray.origin, info.point });
+                StartCoroutine("Raydisappear",rayer);
+                //GameObject.Find("Main Camera").AddComponent<LineRenderer>().SetPositions(new Vector3[] { ray.origin, info.point });
+            }
+
+        }
+    }
+    IEnumerator Raydisappear(GameObject gamObject)
+    {
+        for (float ii = 0.3f; ii >= 0; ii -= Time.deltaTime)
+            yield return 0;
+        Destroy(gamObject);
+    }
+    //public GameObject getray() {
+    //    return rayy;
+    //}
     IEnumerator EnterCD(float cd,int playernumber) {
         for (float i = cd; i >= 0; i -= Time.deltaTime) yield return 0;
         IsPlayerInCD[playernumber - 1] = false;

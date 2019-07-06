@@ -8,7 +8,7 @@ public class characterMovement2D : MonoBehaviour
     public float movingSpeed;
     public float angularSpeed;
     private Transform firePos;
-    private Vector2 forwardPointer;
+    public static Vector2 forwardPointer;
     private Rigidbody2D rb;
 
     void Start()
