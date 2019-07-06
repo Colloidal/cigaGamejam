@@ -6,6 +6,6 @@ using UnityEngine.UI;
 public class BloodControl : MonoBehaviour
 {
     public void ChangeBlood(int num) {
-        gameObject.GetComponent<Slider>().value = num / 100;
+        gameObject.GetComponent<Slider>().value = (float)num / 100;
     }
 }

@@ -25,6 +25,8 @@ public static class GlobalValues
     /// </summary>
     public static bool IsPause;
 
+    public static bool IsGameStart;
+
     public static int Player1HP;
     public static int Player2HP;
     public static int Player3HP;
@@ -33,4 +35,8 @@ public static class GlobalValues
     public static bool Player2Stop;
     public static bool Player3Stop;
     public static bool Player4Stop;
+    public static int Player1Score;
+    public static int Player2Score;
+    public static int Player3Score;
+    public static int Player4Score;
 }
