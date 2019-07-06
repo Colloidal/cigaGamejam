@@ -7,6 +7,7 @@ public class MapManager2D : MonoBehaviour
     public GameObject wall;
     private Transform initialPos;
     private bool mapDone;
+    public GameObject respawn;
     public int mapNumber;
     // Start is called before the first frame update
     void Start()
