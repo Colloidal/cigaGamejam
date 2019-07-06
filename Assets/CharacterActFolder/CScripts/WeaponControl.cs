@@ -21,7 +21,7 @@ public class WeaponControl : MonoBehaviour
         player4 = GameObject.Find("player4");
         WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
         WeaponManager.GetInstance().PlayerChooseWeapon(2, 2);
-        WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
+        WeaponManager.GetInstance().PlayerChooseWeapon(3, 4);
         WeaponManager.GetInstance().PlayerChooseWeapon(4, 1);
     }
 
@@ -103,12 +103,10 @@ public class WeaponControl : MonoBehaviour
             Instantiate(test);
         }
         else if(weapontype == 4) {
-            Ray2D ray = new Ray2D(playerposition, pointer);
-            RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
-            if(sourceplayer == 1) { 
-                //if(Vector3.Distance(player2.transform.position, GameObject.Find("firePos4").transform.position)<5
-                //&&Vector3.Angle())
-            }
+            for(int iii=0;iii<3;iii++)
+                StartCoroutine(WaitAndShoot(sourceplayer, playerposition, pointer,0.01f));
+            for (int iii = 0; iii < 3; iii++)
+                StartCoroutine(WaitAndShoot(sourceplayer, playerposition, pointer, 0.04f));
         }
         else if (weapontype == 3)
         {
@@ -147,6 +145,31 @@ public class WeaponControl : MonoBehaviour
                 }
 
         }
+    }
+    public void moreBullet(int sourceplayer, Vector3 playerposition, Vector3 pointer) {
+        for (int ic = 0; ic <= 4; ic++)
+        {
+            GameObject test = Resources.Load("Bullet" + 4, typeof(GameObject)) as GameObject;
+            Vector3 newpos = playerposition;
+            newpos.x += Random.value/2 - 0.25f;
+            newpos.y += Random.value / 2 -0.25f;
+            test.GetComponent<NormalBullet2>().SourcePlayer = sourceplayer;
+            Vector3 dir = new Vector3(pointer.x * 0.01f * WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Speed + Random.value - 0.5f,
+             pointer.y * 0.01f * WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Speed + Random.value - 0.5f);
+            test.GetComponent<NormalBullet2>().speed = dir;
+            test.transform.position = newpos;
+            Debug.Log(Vector3.Angle(pointer, dir));
+            if (Vector3.Angle(pointer, dir) <= 30)
+            {
+                Instantiate(test);
+
+            }
+        }
+    }
+    IEnumerator WaitAndShoot(int sourceplayer, Vector3 playerposition, Vector3 pointer,float time) {
+        for (float ii = time; ii >= 0; ii -= Time.deltaTime)
+            yield return 0;
+        moreBullet(sourceplayer, playerposition, pointer);
     }
     IEnumerator Raydisappear(GameObject gamObject)
     {
