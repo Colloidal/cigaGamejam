@@ -10,10 +10,12 @@ public class characterMovement2D : MonoBehaviour
     private Transform firePos;
     public static Vector2 forwardPointer;
     private Rigidbody2D rb;
+    private respawnController RC;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        RC = GetComponent<respawnController>();
         firePos = transform.Find("firePos");
     }
 
@@ -41,6 +43,13 @@ public class characterMovement2D : MonoBehaviour
 
     private void characterMoving1()
     {
+        if (!RC.isAlive || RC.isRespawning)
+        {
+            rb.angularVelocity = 0;
+            rb.velocity = new Vector2(0f, 0f);
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             rb.angularVelocity = angularSpeed;
@@ -77,6 +86,8 @@ public class characterMovement2D : MonoBehaviour
 
     private void characterMoving2()
     {
+        if (!RC.isAlive || RC.isRespawning)
+            return;
         if (Input.GetKeyDown(KeyCode.K))
         {
             rb.angularVelocity = angularSpeed;
@@ -113,6 +124,8 @@ public class characterMovement2D : MonoBehaviour
 
     private void characterMoving3()
     {
+        if (!RC.isAlive || RC.isRespawning)
+            return;
         if (Input.GetKeyDown(KeyCode.G))
         {
             rb.angularVelocity = angularSpeed;
@@ -149,6 +162,8 @@ public class characterMovement2D : MonoBehaviour
 
     private void characterMoving4()
     {
+        if (!RC.isAlive || RC.isRespawning)
+            return;
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             rb.angularVelocity = angularSpeed;

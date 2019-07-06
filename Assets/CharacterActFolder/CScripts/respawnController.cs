@@ -5,6 +5,7 @@ using UnityEngine;
 public class respawnController : MonoBehaviour
 {
     public bool isAlive;
+    public bool isRespawning;
     public int dyingTime;
     public Transform []respawnPlace; 
     private characterMovement2D CM;
@@ -13,6 +14,7 @@ public class respawnController : MonoBehaviour
     void Start()
     {
         isAlive = true;
+        isRespawning = false;
         CM = GetComponent< characterMovement2D>();
         SP = GetComponent<SpriteRenderer>();
         respawnPlace[0] = GameObject.Find("respawn1").transform;
@@ -25,22 +27,24 @@ public class respawnController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isAlive /*&& CM.characterNumber == 1*/)
+        if (!isAlive && isRespawning == false /*&& CM.characterNumber == 1*/)
         {
-            Respawn();
+            StartCoroutine(Dying());
+            isAlive = !isAlive;
+            isRespawning = true;
         }
     }
 
     IEnumerator Dying()
     {
-        Debug.Log("正在死亡");
-        yield return new WaitForSeconds(dyingTime);
+        for (float i = dyingTime; i >= 0; i -= Time.deltaTime) yield return 0;
+        Debug.Log("dddd");
+        isRespawning = false;
+        Respawn();
     }
 
     private void Respawn()
     {
-        StartCoroutine(Dying());
-        isAlive = !isAlive;
         int i = Random.Range(0, 4);
         transform.position = respawnPlace[i].position;
     }
