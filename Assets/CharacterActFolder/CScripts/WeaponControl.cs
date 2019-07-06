@@ -44,9 +44,9 @@ public class WeaponControl : MonoBehaviour
             }
             IsPlayerInCD[0] = true;
         }
-        else if (!IsPlayerInCD[1] && Input.GetKey(KeyCode.Return))//玩家2按下且不在cd
+        else if (!IsPlayerInCD[1] && Input.GetKey(KeyCode.Slash))//玩家2按下且不在cd
         {
-            if (WeaponManager.GetInstance().PlayerShoot(1))
+            if (WeaponManager.GetInstance().PlayerShoot(2))
             {
                 Shoot(2, GameObject.Find("firePos2").transform.position, GameObject.Find("firePos2").transform.position - player2.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(2).AttackCD, 2));
@@ -74,7 +74,7 @@ public class WeaponControl : MonoBehaviour
             }
             IsPlayerInCD[2] = true;
         }
-        else if (!IsPlayerInCD[3] && Input.GetKey(KeyCode.Slash))//玩家4按下且不在cd
+        else if (!IsPlayerInCD[3] && Input.GetKey(KeyCode.Return))//玩家4按下且不在cd
         {
             if (WeaponManager.GetInstance().PlayerShoot(4))
             {

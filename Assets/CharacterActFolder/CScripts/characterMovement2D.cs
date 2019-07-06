@@ -7,16 +7,15 @@ public class characterMovement2D : MonoBehaviour
     public int characterNumber;
     public float movingSpeed;
     public float angularSpeed;
-    private Transform firePos;
     public static Vector2 forwardPointer;
-    private Rigidbody2D rb;
+    private Rigidbody2D RB;
     private respawnController RC;
+    public Transform firePos;
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        RB = GetComponent<Rigidbody2D>();
         RC = GetComponent<respawnController>();
-        firePos = transform.Find("firePos");
     }
 
     // Update is called once per frame
@@ -45,156 +44,187 @@ public class characterMovement2D : MonoBehaviour
     {
         if (!RC.isAlive || RC.isRespawning)
         {
-            rb.angularVelocity = 0;
-            rb.velocity = new Vector2(0f, 0f);
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
             return;
         }
-
+        if (GlobalValues.Player1Stop)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
+        }
         if (Input.GetKeyDown(KeyCode.A))
         {
-            rb.angularVelocity = angularSpeed;
+            RB.angularVelocity = angularSpeed;
         }
         if (Input.GetKeyDown(KeyCode.D))
         {
-            rb.angularVelocity = angularSpeed * -1;
+            RB.angularVelocity = angularSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.A))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKeyUp(KeyCode.D))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKey(KeyCode.W))
         {
-            rb.velocity = forwardPointer * movingSpeed;
+            RB.velocity = forwardPointer * movingSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.velocity = forwardPointer * movingSpeed * -1;
+            RB.velocity = forwardPointer * movingSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.W))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
         if (Input.GetKeyUp(KeyCode.S))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
     }
 
     private void characterMoving2()
     {
         if (!RC.isAlive || RC.isRespawning)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
             return;
+        }
+        if (GlobalValues.Player2Stop)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
+        }
         if (Input.GetKeyDown(KeyCode.K))
         {
-            rb.angularVelocity = angularSpeed;
+            RB.angularVelocity = angularSpeed;
         }
         if (Input.GetKeyDown(KeyCode.Semicolon))
         {
-            rb.angularVelocity = angularSpeed * -1;
+            RB.angularVelocity = angularSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.K))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKeyUp(KeyCode.Semicolon))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKey(KeyCode.O))
         {
-            rb.velocity = forwardPointer * movingSpeed;
+            RB.velocity = forwardPointer * movingSpeed;
         }
         if (Input.GetKey(KeyCode.L))
         {
-            rb.velocity = forwardPointer * movingSpeed * -1;
+            RB.velocity = forwardPointer * movingSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.O))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
         if (Input.GetKeyUp(KeyCode.L))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
     }
 
     private void characterMoving3()
     {
         if (!RC.isAlive || RC.isRespawning)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
             return;
+        }
+        if (GlobalValues.Player3Stop)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
+        }
         if (Input.GetKeyDown(KeyCode.G))
         {
-            rb.angularVelocity = angularSpeed;
+            RB.angularVelocity = angularSpeed;
         }
         if (Input.GetKeyDown(KeyCode.J))
         {
-            rb.angularVelocity = angularSpeed * -1;
+            RB.angularVelocity = angularSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.G))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKeyUp(KeyCode.J))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKey(KeyCode.Y))
         {
-            rb.velocity = forwardPointer * movingSpeed;
+            RB.velocity = forwardPointer * movingSpeed;
         }
         if (Input.GetKey(KeyCode.H))
         {
-            rb.velocity = forwardPointer * movingSpeed * -1;
+            RB.velocity = forwardPointer * movingSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.Y))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
         if (Input.GetKeyUp(KeyCode.H))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
     }
 
     private void characterMoving4()
     {
         if (!RC.isAlive || RC.isRespawning)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
             return;
+        }
+        if (GlobalValues.Player4Stop)
+        {
+            RB.angularVelocity = 0;
+            RB.velocity = new Vector2(0f, 0f);
+        }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            rb.angularVelocity = angularSpeed;
+            RB.angularVelocity = angularSpeed;
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            rb.angularVelocity = angularSpeed * -1;
+            RB.angularVelocity = angularSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            rb.angularVelocity = 0;
+            RB.angularVelocity = 0;
         }
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            rb.velocity = forwardPointer * movingSpeed;
+            RB.velocity = forwardPointer * movingSpeed;
         }
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            rb.velocity = forwardPointer * movingSpeed * -1;
+            RB.velocity = forwardPointer * movingSpeed * -1;
         }
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
         if (Input.GetKeyUp(KeyCode.DownArrow))
         {
-            rb.velocity = new Vector2(0f, 0f);
+            RB.velocity = new Vector2(0f, 0f);
         }
     }
 
