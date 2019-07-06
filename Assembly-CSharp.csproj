@@ -62,11 +62,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\CharacterActFolder\CPrefabs\BloodControl.cs" />
+    <Compile Include="Assets\CharacterActFolder\CScripts\Bullet\NormalBullet.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\CharacterMovement.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\characterMovement2D.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\GlobalValues.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\MapManager.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\MapManager2D.cs" />
+    <Compile Include="Assets\CharacterActFolder\CScripts\respawnController.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\Weapon.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\WeaponControl.cs" />
     <Compile Include="Assets\CharacterActFolder\CScripts\WeaponManager.cs" />

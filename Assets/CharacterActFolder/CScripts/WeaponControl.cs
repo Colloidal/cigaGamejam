@@ -11,7 +11,7 @@ public class WeaponControl : MonoBehaviour
     private void Start()
     {
         player = GameObject.Find("player");
-        WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
+        WeaponManager.GetInstance().PlayerChooseWeapon(1,1);
         WeaponManager.GetInstance().PlayerChooseWeapon(2, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(4, 1);
@@ -24,7 +24,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                WeaponManager.GetInstance().Shoot(1,player.transform.position);
+                WeaponManager.GetInstance().Shoot(1,GameObject.Find("firePos").transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(1).AttackCD, 1));
             }
             else
