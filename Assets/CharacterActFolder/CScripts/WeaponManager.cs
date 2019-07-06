@@ -59,11 +59,25 @@ public class WeaponManager : MonoBehaviour
         {
             gun.Number = 1;
             gun.Name = "第一把发子弹的枪";
-            gun.Amount = 10;
+            gun.Amount = 25;
             gun.Damage = 10;
             gun.Speed = 30;
             gun.ReloadCD = 1f;
-            gun.AttackCD = 0.2f;
+            gun.AttackCD = 0.13f;
+            gun.Type = 1;
+            gun.WeaponAttackSound = null;
+            gun.WeaponReloadSound = null;
+            gun.WeaponIcon = null;
+        }
+        else if (number == 2)
+        {
+            gun.Number = 2;
+            gun.Name = "看上去是狙击枪";
+            gun.Amount = 6;
+            gun.Damage = 70;
+            gun.Speed = 100;
+            gun.ReloadCD = 2f;
+            gun.AttackCD = 2f;
             gun.Type = 1;
             gun.WeaponAttackSound = null;
             gun.WeaponReloadSound = null;
@@ -79,6 +93,20 @@ public class WeaponManager : MonoBehaviour
             gun.ReloadCD = 3f;
             gun.AttackCD = 3f;
             gun.Type = 3;
+            gun.WeaponAttackSound = null;
+            gun.WeaponReloadSound = null;
+            gun.WeaponIcon = null;
+        }
+        else if (number == 4)
+        {
+            gun.Number = 4;
+            gun.Name = "霰弹枪";
+            gun.Amount = 7;
+            gun.Damage = 20;
+            gun.Speed = 10;
+            gun.ReloadCD = 6f;
+            gun.AttackCD = 0.5f;
+            gun.Type = 4;
             gun.WeaponAttackSound = null;
             gun.WeaponReloadSound = null;
             gun.WeaponIcon = null;

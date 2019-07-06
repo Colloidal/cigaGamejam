@@ -3258,6 +3258,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 0}
+  Score1: {fileID: 0}
+  Score2: {fileID: 0}
+  Score3: {fileID: 0}
+  Score4: {fileID: 0}
 --- !u!1 &1247337933
 GameObject:
   m_ObjectHideFlags: 0

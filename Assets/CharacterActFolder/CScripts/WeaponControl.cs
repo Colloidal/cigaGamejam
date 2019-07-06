@@ -20,7 +20,7 @@ public class WeaponControl : MonoBehaviour
         player3 = GameObject.Find("player3");
         player4 = GameObject.Find("player4");
         WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
-        WeaponManager.GetInstance().PlayerChooseWeapon(2, 1);
+        WeaponManager.GetInstance().PlayerChooseWeapon(2, 2);
         WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(4, 1);
     }
@@ -93,7 +93,7 @@ public class WeaponControl : MonoBehaviour
     public void Shoot(int sourceplayer, Vector3 playerposition, Vector3 pointer)
     {
         int weapontype = WeaponManager.GetInstance().GetPlayerWeapon(sourceplayer).Number;
-        if (weapontype == 1)
+        if (weapontype == 1||weapontype == 2)
         {
             GameObject test = Resources.Load("Bullet" + weapontype.ToString(), typeof(GameObject)) as GameObject;
             test.GetComponent<NormalBullet>().SourcePlayer = sourceplayer;
@@ -102,7 +102,7 @@ public class WeaponControl : MonoBehaviour
             test.transform.position = playerposition;
             Instantiate(test);
         }
-        else if(weapontype == 2) {
+        else if(weapontype == 4) {
             Ray2D ray = new Ray2D(playerposition, pointer);
             RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
             if(sourceplayer == 1) { 
