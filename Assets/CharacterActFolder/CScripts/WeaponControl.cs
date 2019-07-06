@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class WeaponControl : MonoBehaviour
 {
+    public GameObject player;
+
     private List<bool> IsPlayerInCD = new List<bool> { false, false, false, false };
 
     private void Start()
     {
-        WeaponManager.GetInstance().PlayerChooseWeapon(1,1);
+        player = GameObject.Find("player");
+        WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
         WeaponManager.GetInstance().PlayerChooseWeapon(2, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(4, 1);
@@ -21,7 +24,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                Debug.Log("biubiubiu!");
+                WeaponManager.GetInstance().Shoot(1,player.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(1).AttackCD, 1));
             }
             else

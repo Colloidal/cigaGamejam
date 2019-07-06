@@ -32,6 +32,7 @@ public class Weapon
     /// 武器类型,1为普通2为霰弹3为光束
     /// </summary>
     public int Type;
+    public float Speed;
     /// <summary>
     /// 武器攻击音效
     /// </summary>

@@ -24,4 +24,9 @@ public static class GlobalValues
     /// 是否暂停
     /// </summary>
     public static bool IsPause;
+
+    public static int Player1HP;
+    public static int Player2HP;
+    public static int Player3HP;
+    public static int Player4HP;
 }
