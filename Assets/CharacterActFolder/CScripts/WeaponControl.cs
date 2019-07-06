@@ -96,9 +96,13 @@ public class WeaponControl : MonoBehaviour
             test.transform.position = playerposition;
             Instantiate(test);
         }
+        else if(weapontype == 2) {
+            Ray2D ray = new Ray2D(playerposition, pointer);
+            RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
+            
+        }
         else if (weapontype == 3)
         {
-            WeaponRay weaponRay = new WeaponRay();
             Ray2D ray = new Ray2D(playerposition, pointer);
             RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
             if (info.collider != null)
@@ -120,9 +124,18 @@ public class WeaponControl : MonoBehaviour
                 lineRenderer.endWidth = 0.07f;
                 lineRenderer.startColor = new Color(1, 0, 0);
                 lineRenderer.SetPositions(new Vector3[] { ray.origin, info.point });
-                StartCoroutine("Raydisappear",rayer);
-                //GameObject.Find("Main Camera").AddComponent<LineRenderer>().SetPositions(new Vector3[] { ray.origin, info.point });
-            }
+                StartCoroutine("Raydisappear", rayer);
+                if (sourceplayer == 1) { GlobalValues.Player1Stop = !GlobalValues.Player1Stop; StartCoroutine(PlayerStop(GlobalValues.Player1Stop));  }
+                else if (sourceplayer == 2)
+                {
+                    GlobalValues.Player2Stop = !GlobalValues.Player2Stop;
+                    StartCoroutine(PlayerStop(GlobalValues.Player2Stop));
+                }
+                else if (sourceplayer == 3) { GlobalValues.Player3Stop = !GlobalValues.Player3Stop; StartCoroutine(PlayerStop(GlobalValues.Player3Stop));}
+                else if (sourceplayer == 4) { GlobalValues.Player4Stop = !GlobalValues.Player4Stop; 
+                StartCoroutine(PlayerStop(GlobalValues.Player4Stop));}
+                    //GameObject.Find("Main Camera").AddComponent<LineRenderer>().SetPositions(new Vector3[] { ray.origin, info.point });
+                }
 
         }
     }
@@ -138,5 +151,10 @@ public class WeaponControl : MonoBehaviour
     IEnumerator EnterCD(float cd,int playernumber) {
         for (float i = cd; i >= 0; i -= Time.deltaTime) yield return 0;
         IsPlayerInCD[playernumber - 1] = false;
+    }
+    IEnumerator PlayerStop(bool playerstop) {
+        for (float ii = 1f; ii >= 0; ii -= Time.deltaTime)
+            yield return 0;
+        GlobalValues.Player1Stop = !GlobalValues.Player1Stop;
     }
 }
