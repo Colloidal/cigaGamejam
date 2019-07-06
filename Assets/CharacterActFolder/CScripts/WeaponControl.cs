@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class WeaponControl : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject player1;
+    public GameObject player2;
+    public GameObject player3; public GameObject player4;
     GameObject rayy;
 
 
@@ -13,7 +15,10 @@ public class WeaponControl : MonoBehaviour
     private void Start()
     {
         rayy = new GameObject();
-        player = GameObject.Find("player");
+        player1 = GameObject.Find("player1");
+        player2 = GameObject.Find("player2");
+        player3 = GameObject.Find("player3");
+        player4 = GameObject.Find("player4");
         WeaponManager.GetInstance().PlayerChooseWeapon(1,3);
         WeaponManager.GetInstance().PlayerChooseWeapon(2, 1);
         WeaponManager.GetInstance().PlayerChooseWeapon(3, 1);
@@ -27,7 +32,8 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                Shoot(1,GameObject.Find("firePos").transform.position,characterMovement2D.forwardPointer);
+                Shoot(1,GameObject.Find("firePos1").transform.position,
+                 GameObject.Find("firePos1").transform.position - player1.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(1).AttackCD, 1));
             }
             else
@@ -42,7 +48,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                Shoot(2, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
+                Shoot(2, GameObject.Find("firePos2").transform.position, GameObject.Find("firePos2").transform.position - player2.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(2).AttackCD, 2));
             }
             else
@@ -57,7 +63,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(3))
             {
-                Shoot(3, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
+                Shoot(3, GameObject.Find("firePos3").transform.position, GameObject.Find("firePos3").transform.position - player3.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(3).AttackCD, 3));
             }
             else
@@ -72,7 +78,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(4))
             {
-                Shoot(4, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
+                Shoot(4, GameObject.Find("firePos4").transform.position, GameObject.Find("firePos4").transform.position - player4.transform.position);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(4).AttackCD, 4));
             }
             else
@@ -99,7 +105,10 @@ public class WeaponControl : MonoBehaviour
         else if(weapontype == 2) {
             Ray2D ray = new Ray2D(playerposition, pointer);
             RaycastHit2D info = Physics2D.Raycast(ray.origin, ray.direction);
-            
+            if(sourceplayer == 1) { 
+                //if(Vector3.Distance(player2.transform.position, GameObject.Find("firePos4").transform.position)<5
+                //&&Vector3.Angle())
+            }
         }
         else if (weapontype == 3)
         {
