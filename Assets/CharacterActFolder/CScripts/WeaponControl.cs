@@ -42,7 +42,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(1))
             {
-                Debug.Log("biubiubiu!2");
+                Shoot(2, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(2).AttackCD, 2));
             }
             else
@@ -57,7 +57,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(3))
             {
-                Debug.Log("biubiubiu!3");
+                Shoot(3, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(3).AttackCD, 3));
             }
             else
@@ -72,7 +72,7 @@ public class WeaponControl : MonoBehaviour
         {
             if (WeaponManager.GetInstance().PlayerShoot(4))
             {
-                Debug.Log("biubiubiu!4");
+                Shoot(4, GameObject.Find("firePos").transform.position, characterMovement2D.forwardPointer);
                 StartCoroutine(EnterCD(WeaponManager.GetInstance().GetPlayerWeapon(4).AttackCD, 4));
             }
             else
